@@ -62,14 +62,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CatVie
         CategoryDTO objCat = lstCat.get(position);
         holder.tvId.setText(String.valueOf(objCat.getId()));
         holder.tvName.setText(objCat.getName());
-        holder.tvPrice.setText(objCat.getId() + " ");
         holder.tvEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, EditCatActivity.class);
                 i.putExtra("id_cat", objCat.getId());
                 i.putExtra("name_cat", objCat.getName());
-                i.putExtra("price_cat", objCat.getId());
                 toolLauncher.launch(i);
             }
         });
@@ -81,14 +79,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CatVie
     }
 
     public static class CatViewHolder extends RecyclerView.ViewHolder {
-        TextView tvId, tvName, tvEdit, tvPrice;
+        TextView tvId, tvName, tvEdit;
 
         public CatViewHolder(@NonNull View itemView) {
             super(itemView);
             tvId = itemView.findViewById(R.id.tv_id);
             tvName = itemView.findViewById(R.id.tv_name);
             tvEdit = itemView.findViewById(R.id.tv_edit);
-            tvPrice = itemView.findViewById(R.id.tv_price);
         }
     }
 }

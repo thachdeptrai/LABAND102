@@ -42,6 +42,18 @@
             android:layout_height="wrap_content"/>
 
     </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/input_idcat"
+        android:hint="Chọn loại sản phẩm"
+        android:layout_marginTop="30dp">
+
+        <Spinner
+            android:id="@+id/spinner_idcat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnluu"

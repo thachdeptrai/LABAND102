@@ -3,7 +3,9 @@ package com.example.demosqlite2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -18,10 +20,12 @@ import com.example.demosqlite2.DTO.CategoryDTO;
 import com.example.demosqlite2.DTO.ProductDTO;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
+
 public class AddProductACtivity extends AppCompatActivity {
     Button btnluu;
-    TextInputLayout inputten , inputPrice;
-
+    Spinner spinnerIdCat;
+    TextInputLayout inputten , inputPrice , inputIdcat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,12 +40,22 @@ public class AddProductACtivity extends AppCompatActivity {
         btnluu = findViewById(R.id.btnluu);
         inputten = findViewById(R.id.input_ten);
         inputPrice = findViewById(R.id.input_price);
+        spinnerIdCat = findViewById(R.id.spinner_idcat);
+        // lấy danh sách từ cathegory thiết lập vào spiner
+
+        CategoryDAO categoryDAO = new CategoryDAO(this);
+        ArrayList<CategoryDTO> categoryList = categoryDAO.getList();
+        ArrayAdapter<CategoryDTO> categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoryList);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerIdCat.setAdapter(categoryAdapter);
 
         btnluu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = inputten.getEditText().getText().toString();
                 String priceStr = inputPrice.getEditText().getText().toString();
+                CategoryDTO selectedCategory = (CategoryDTO) spinnerIdCat.getSelectedItem();
+                int categoryId = selectedCategory.getId();
 
                 if (name.isEmpty() || priceStr.isEmpty()) {
                     Toast.makeText(AddProductACtivity.this, "Vui lòng nhập đủ thông tin!", Toast.LENGTH_SHORT).show();
@@ -49,7 +63,6 @@ public class AddProductACtivity extends AppCompatActivity {
                 }
 
                 double price = Double.parseDouble(priceStr);
-                int categoryId = 1; // ID danh mục, bạn cần lấy từ danh mục đã chọn (tạm thời hardcode là 1)
 
                 ProductDTO product = new ProductDTO(name, price, categoryId);
                 ProductDAO productDAO = new ProductDAO(AddProductACtivity.this);

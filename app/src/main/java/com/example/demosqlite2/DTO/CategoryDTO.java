@@ -3,7 +3,6 @@ package com.example.demosqlite2.DTO;
 public class CategoryDTO {
     int id ;
     String name ;
-    double price;
     public  String toString () {
         return  "ID cat: " + id + "Name: " + name ;
 

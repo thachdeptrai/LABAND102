@@ -9,7 +9,7 @@ public class MyDbHelper extends SQLiteOpenHelper {
     public  MyDbHelper(Context context) {
         super(context, "QLBH.db", null, 2);
     }
-
+    
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         // các lệnh sql tọa bảng trong đây

@@ -55,7 +55,7 @@ public class CategoryDAO {
                 // lấy dữ liệu
                 int id = c.getInt(0);
                 String name = c.getString(1);
-                CategoryDTO categoryDTO = new CategoryDTO("id, name");
+                CategoryDTO categoryDTO = new CategoryDTO(id,name);
                 listCat.add(categoryDTO);
             } while (c.moveToNext());
         }
@@ -66,14 +66,14 @@ public class CategoryDAO {
     public ArrayList<CategoryDTO> getListfromcat() {
         // lấy danh sách
         ArrayList<CategoryDTO> listCat = new ArrayList<>();
-        Cursor c = db.rawQuery("SELECT id, name , price FROM tb_product", null);
+        Cursor c = db.rawQuery("SELECT id, name  FROM tb_cat", null);
         if (c != null && c.getCount() > 0) {
             c.moveToFirst();
             do {
                 // lấy dữ liệu
                 int id = c.getInt(0);
                 String name = c.getString(1);
-                CategoryDTO categoryDTO = new CategoryDTO("id, name, price");
+                CategoryDTO categoryDTO = new CategoryDTO(id,name);
                 listCat.add(categoryDTO);
             } while (c.moveToNext());
         }
